@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<link rel="icon" href="./favicon.ico?v=2" type="image/x-icon">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Amlan Consumer Behavior Research Dashboard</title>
+<meta name="description" content="BA234.1 Consumer Behavior study of Amlan Purified Water using Martyn R. Lewis's Customer Buying Journey framework."/>
+<link rel="icon" href="./favicon.ico?v=3" type="image/x-icon"/>
 <style>
 :root{--red:#d71920;--red-dark:#a91118;--navy:#123a5a;--navy2:#0b2940;--blue:#2f7da7;--water:#eaf6fb;--water2:#d7eef7;--ink:#183247;--muted:#657b8a;--card:#fff;--line:#dce9f0;--soft:#f5fafc;--good:#2f7d6c;--shadow:0 16px 42px rgba(18,58,90,.12)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(circle at 92% 4%,rgba(215,25,32,.08),transparent 24rem),linear-gradient(180deg,#f8fcfe 0%,#edf7fb 42%,#f8fcfe 100%);font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.5}.shell{max-width:1240px;margin:auto;padding:0 22px 72px}
@@ -16,58 +18,302 @@ section{margin-top:34px}.section-head{display:flex;align-items:end;justify-conte
 .journey{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:stretch}.stage{border-radius:16px;padding:16px 12px;text-align:center;border:1px solid var(--line);background:#fff;min-height:126px}.stage.bad{background:#fff4f4;border-color:#f3c3c5}.stage.good{background:#f3fbf8;border-color:#c9e9df}.stage .num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;margin:0 auto 8px;background:var(--navy);color:#fff;font-weight:900;font-size:12px}.stage.bad .num{background:var(--red)}.stage.good .num{background:var(--good)}.stage h4{margin:0 0 6px;font-size:14px;color:var(--navy)}.stage p{margin:0;color:var(--muted);font-size:11px}.zone{margin-top:10px;text-align:center;padding:9px 12px;border-radius:999px;background:#fff1f1;color:var(--red-dark);font-size:12px;font-weight:900}
 .matrix{display:grid;grid-template-columns:170px repeat(4,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden}.cell{padding:13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px;background:#fff}.cell.head{background:var(--navy);color:#fff;font-weight:900}.cell.rowhead{font-weight:900;color:var(--navy);background:#f6fbfd}.cell.yes{background:#f2fbf7;color:#236353;font-weight:800}.cell.warn{background:#fff6f6;color:#982d31;font-weight:800}.insight{background:linear-gradient(135deg,#fff,var(--water));border:1px solid var(--line);padding:24px;border-radius:22px}.insight .tag{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}.insight h3{margin:8px 0;color:var(--navy);font-size:22px}.insight p{margin:0;color:var(--muted);font-size:14px}
 footer{margin-top:36px;background:var(--navy2);color:#dbe9f2;border-radius:24px;padding:26px}footer strong{color:#fff}footer p{margin:6px 0;font-size:12px}.sources{display:grid;grid-template-columns:2fr 1fr;gap:18px}.note{color:#a9bdca}@media(max-width:980px){.g5,.g3,.g2{grid-template-columns:1fr 1fr}.journey{grid-template-columns:repeat(3,1fr)}nav{display:none}}@media(max-width:640px){.shell{padding:0 14px 50px}.topbar-inner{padding:10px 14px}.hero{padding:38px 24px 34px;border-radius:22px}.g5,.g3,.g2{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.section-head p{text-align:left}.bar-row{grid-template-columns:120px 1fr 44px}.journey{grid-template-columns:1fr 1fr}.sources{grid-template-columns:1fr}.matrix{min-width:860px}}
+
+.question-card{margin-top:18px;padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);max-width:880px}
+.question-card .q-label{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ff9da1}
+.question-card .q-text{margin-top:6px;font-size:18px;font-weight:800;line-height:1.35;color:#fff}
+.framework-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.framework-item{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 13px;min-height:124px;box-shadow:0 8px 22px rgba(18,58,90,.05)}
+.framework-item .fnum{font-size:11px;font-weight:900;letter-spacing:.1em;color:var(--red);text-transform:uppercase}
+.framework-item h4{margin:6px 0;color:var(--navy);font-size:15px}
+.framework-item p{margin:0;color:var(--muted);font-size:12px}
+.q4{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.q4-box{padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.q4-box.active{border:2px solid var(--red);background:#fff6f6}
+.q4-box .axis{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.q4-box h4{margin:5px 0 6px;color:var(--navy);font-size:17px}
+.q4-box p{margin:0;color:var(--muted);font-size:13px}
+.split-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.compare-panel{border-radius:20px;padding:22px;border:1px solid var(--line);background:#fff}
+.compare-panel.company{background:#f7fbfd}.compare-panel.field{background:#fff7f7;border-color:#f3c9cb}
+.compare-panel h3{margin:0 0 12px;color:var(--navy);font-size:21px}
+.compare-row{padding:11px 0;border-top:1px solid var(--line);font-size:13px}
+.compare-row:first-of-type{border-top:0}
+.compare-row b{display:block;color:var(--navy);margin-bottom:3px}
+.reflection{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.reflection-panel{padding:22px;border-radius:20px;border:1px solid var(--line);background:#fff}
+.reflection-panel h3{margin:0 0 12px;color:var(--navy)}
+.reflection-panel ul,.limits-list{margin:0;padding-left:20px;color:var(--muted)}
+.reflection-panel li,.limits-list li{margin:8px 0}
+.verdict{margin-top:16px;padding:20px;border-radius:18px;background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff}
+.verdict strong{display:block;font-size:18px;margin-bottom:5px}
+.stage.future{background:#f5f7f8;border:1px dashed #9eafb9}
+.stage.future .num{background:#879aa6}
+.stage.future h4{color:#526c7b}
+.tri-mobile{display:none}
+.tri-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.tri-card h4{margin:0 0 10px;color:var(--navy);font-size:16px}
+.tri-line{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:7px 0;border-top:1px solid #edf3f6;font-size:12px}
+.tri-line:first-of-type{border-top:0}
+.tri-line b{color:var(--navy)}
+.limits-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ref-block{padding:16px 0;border-top:1px solid var(--line)}
+.ref-block:first-of-type{border-top:0}
+.ref-block strong{color:var(--navy)}
+.source-note{margin-top:12px;color:var(--muted);font-size:11px}
+@media(max-width:980px){.framework-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){
+  .framework-grid{grid-template-columns:1fr 1fr}
+  .q4,.split-compare,.reflection,.limits-grid{grid-template-columns:1fr}
+  .matrix-wrap{display:none}
+  .tri-mobile{display:grid;gap:10px}
+  .question-card .q-text{font-size:16px}
+}
+
+
+.slides-shell{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 10px 28px rgba(18,58,90,.06)}
+.slides-top{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#fff,#fbf5ef)}
+.slides-top h3{margin:0;color:var(--navy);font-size:22px}
+.slides-top p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.slides-actions{display:flex;gap:10px;flex-wrap:wrap}
+.slide-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:800;font-size:12px;border:1px solid var(--line);background:#fff;color:var(--navy)}
+.slide-btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.pdf-frame-wrap{background:#1d2227;padding:14px}
+.pdf-frame{width:100%;height:820px;border:0;border-radius:14px;background:#2a2f34}
+.slides-note{padding:14px 20px 18px;color:var(--muted);font-size:11px}
+.slide-preview-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px 18px;background:#f8f3ec;border-top:1px solid var(--line)}
+.slide-preview-card{padding:12px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:12px;color:var(--muted)}
+.slide-preview-card b{display:block;color:var(--navy);margin-bottom:4px}
+@media(max-width:760px){
+  .slides-top{align-items:flex-start;flex-direction:column}
+  .pdf-frame{height:560px}
+  .slide-preview-strip{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .pdf-frame-wrap{display:none}
+  .slide-preview-strip{grid-template-columns:1fr}
+  .slides-note{font-size:12px}
+}
+
 </style>
 </head>
 <body>
-<div class="topbar"><div class="topbar-inner"><div class="brandmark"><div class="drop"></div><div>Amlan Consumer Behavior Study</div></div><nav><a href="#presentation">Presentation</a><a href="#sample">Sample</a><a href="#survey">Survey</a><a href="#interviews">Interviews</a><a href="#retail">Retail</a><a href="#journey">Journey</a><a href="#implications">Implications</a></nav></div></div>
+<div class="topbar"><div class="topbar-inner"><div class="brandmark"><div class="drop"></div><div>Amlan Consumer Behavior Study</div></div><nav><a href="#slides">Slides</a><a href="#framework">Framework</a><a href="#sample">Methods</a><a href="#survey">Survey</a><a href="#retail">Retail</a><a href="#journey">Journey</a><a href="#comparison">Analysis</a><a href="#reflection">Reflection</a><a href="#implications">Action</a></nav></div></div>
 <main class="shell">
-<header class="hero"><div class="eyebrow"><span class="dot"></span> BA234.1 Consumer Behavior · Group Research</div><h1>The data behind the <span>“Missing Bottle”</span></h1><p>An interactive research dashboard summarizing evidence from consumers, retailers, store observations, and Amlan management on how bottled-water choices are made.</p><div class="hero-meta"><span>Exploratory mixed-method study</span><span>Metro Cebu / Philippines context</span><span>Lewis Customer Buying Journey lens</span><span>Data collection completed October 2026</span></div><div class="wave"></div></header>
+<header class="hero"><div class="eyebrow"><span class="dot"></span> BA234.1 Consumer Behavior · Group Research</div><h1>The data behind the <span>“Missing Bottle”</span></h1><p>An interactive research dashboard summarizing evidence from consumers, retailers, store observations, and Amlan management on how bottled-water choices are made.</p><div class="question-card">
+<div class="q-label">Research question</div>
+<div class="q-text">Where does Amlan fall out of the bottled-water buying journey, and what prevents consumers from reaching trial and purchase?</div>
+</div>
+<div class="hero-meta"><span>Exploratory mixed-method study</span><span>Metro Cebu / Philippines context</span><span>Lewis Customer Buying Journey lens</span><span>Data collection completed October 2026</span></div><div class="wave"></div></header>
 <section id="presentation">
-  <div class="section-head">
-    <h2>Research presentation</h2>
-    <p>Watch the group presentation that brings together the book review, field evidence, analysis, and managerial recommendations.</p>
-  </div>
-  <div class="card video-card">
-    <div class="video-copy">
-      <div>
-        <h3>The Case of the Missing Bottle</h3>
-        <p>BA234.1 Consumer Behavior presentation on Amlan Purified Water using Martyn R. Lewis’s Customer Buying Journey framework.</p>
-      </div>
-      <div class="video-badge">Group presentation</div>
-    </div>
-    <div class="video-frame">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/wFO5NUYSL_A"
-        title="The Case of the Missing Bottle - Amlan Consumer Behavior Presentation"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="video-footer">
-      <span>Embedded from YouTube. Playback requires an internet connection.</span>
-      <a href="https://youtu.be/wFO5NUYSL_A" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
-    </div>
-  </div>
+<div class="section-head">
+<h2>Research presentation</h2>
+<p>Watch the group presentation that brings together the book review, field evidence, analysis, and managerial recommendations.</p>
+</div>
+<div class="card video-card">
+<div class="video-copy">
+<div>
+<h3>The Case of the Missing Bottle</h3>
+<p>BA234.1 Consumer Behavior presentation on Amlan Purified Water using Martyn R. Lewis’s Customer Buying Journey framework.</p>
+</div>
+<div class="video-badge">Group presentation</div>
+</div>
+<div class="video-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/wFO5NUYSL_A" title="The Case of the Missing Bottle - Amlan Consumer Behavior Presentation">
+</iframe>
+</div>
+<div class="video-footer">
+<span>Embedded from YouTube. Playback requires an internet connection.</span>
+<a href="https://youtu.be/wFO5NUYSL_A" rel="noopener noreferrer" target="_blank">Open on YouTube ↗</a>
+</div>
+</div>
+</section>
+
+<section id="slides">
+<div class="section-head">
+<h2>Presentation slides</h2>
+<p>The complete 28-slide deck for <em>The Case of the Missing Bottle: Why They Don’t Buy Amlan</em>.</p>
+</div>
+
+<div class="slides-shell">
+<div class="slides-top">
+<div>
+<h3>Con Beh Amlan Presentation</h3>
+<p>BA234.1 Consumer Behavior · 28 slides · case-investigation visual narrative</p>
+</div>
+<div class="slides-actions">
+<a class="slide-btn primary" href="./amlan-presentation.pdf" target="_blank" rel="noopener">Open slides</a>
+<a class="slide-btn" href="./amlan-presentation.pdf" download>Download PDF</a>
+</div>
+</div>
+
+<div class="pdf-frame-wrap">
+<iframe class="pdf-frame" src="./amlan-presentation.pdf#view=FitH&toolbar=1&navpanes=0" title="Amlan Consumer Behavior Presentation Slides"></iframe>
+</div>
+
+<div class="slide-preview-strip">
+<div class="slide-preview-card"><b>Part 1 · Decode the DNA</b>Lewis, Outside-In thinking, six DNA strands, 4Q, buying concerns, and the four imperatives.</div>
+<div class="slide-preview-card"><b>Part 2 · Follow the Buyer</b>Amlan context, management hypotheses, methodology, triggers, retailers, and buying styles.</div>
+<div class="slide-preview-card"><b>Part 3 · Follow the Evidence</b>Survey, awareness funnel, interviews, store observations, contradictions, and journey breakdown.</div>
+<div class="slide-preview-card"><b>Part 4 · Solve the Case</b>Critical reflection, upstream diagnosis, managerial missions, differentiated journeys, and 90-day plan.</div>
+</div>
+
+<div class="slides-note">
+If the embedded viewer does not appear on a phone or browser, use “Open slides.” Keep <strong>amlan-presentation.pdf</strong> in the same folder as this HTML file when publishing the site.
+</div>
+</div>
 </section>
 
 
-<section id="sample"><div class="section-head"><h2>Research dataset</h2><p>Multiple sources were used so that one survey number or one interview would not carry the whole conclusion.</p></div><div class="grid g5"><div class="card metric"><div class="k">109</div><div class="label">Raw survey responses</div><div class="sub">Before eligibility screening</div></div><div class="card metric"><div class="k red">87</div><div class="label">Eligible survey respondents</div><div class="sub">18+ and bought bottled water in the past 30 days</div></div><div class="card metric"><div class="k">81</div><div class="label">Philippines-based respondents</div><div class="sub">Used for Amlan-specific funnel analysis</div></div><div class="card metric"><div class="k">6 + 6</div><div class="label">Consumer + retailer interviews</div><div class="sub">Qualitative purchase stories and trade evidence</div></div><div class="card metric"><div class="k red">13</div><div class="label">Store observations</div><div class="sub">Photographed retail displays, Oct 5–11, 2026</div></div></div><div class="callout" style="margin-top:16px">Also included: 1 Amlan company interview. The design is exploratory and uses convenience sampling, so the findings describe our sample and observed outlets, not all Filipino consumers.</div></section>
+<section id="framework">
+<div class="section-head">
+<h2>How we analyzed the buying journey</h2>
+<p>Lewis asks businesses to start with how customers actually buy. We used the six strands of Customer Buying Journey DNA as the analytical lens.</p>
+</div>
+<div class="framework-grid">
+<div class="framework-item"><div class="fnum">Strand 1</div><h4>Triggers</h4><p>What starts the journey, such as heat, thirst, meals, work, or travel.</p></div>
+<div class="framework-item"><div class="fnum">Strand 2</div><h4>Steps</h4><p>What the buyer actually does from need recognition to purchase.</p></div>
+<div class="framework-item"><div class="fnum">Strand 3</div><h4>Key Players</h4><p>People who influence the purchase, including retailers and family members.</p></div>
+<div class="framework-item"><div class="fnum">Strand 4</div><h4>Buying Style</h4><p>How the buyer approaches the decision, including Lewis's 4Q model.</p></div>
+<div class="framework-item"><div class="fnum">Strand 5</div><h4>Value Drivers</h4><p>What the buyer expects to gain, such as safety, availability, price, taste, or convenience.</p></div>
+<div class="framework-item"><div class="fnum">Strand 6</div><h4>Buying Concerns</h4><p>Friction that can delay, redirect, or stop the purchase.</p></div>
+</div>
 
-<section id="survey"><div class="section-head"><h2>Consumer value drivers</h2><p>Importance rating from 1 = not important to 5 = very important, among 87 eligible survey respondents.</p></div><div class="grid g2"><div class="card chart-card"><h3 class="chart-title">Practical value drivers rank highest</h3><p class="chart-sub">Average importance scores</p><div class="bar-chart"><div class="bar-row"><div class="bar-label">Safety & cleanliness</div><div class="track"><div class="fill red" style="--w:94.8%"></div></div><div class="bar-value">4.74</div></div><div class="bar-row"><div class="bar-label">Availability</div><div class="track"><div class="fill" style="--w:85%"></div></div><div class="bar-value">4.25</div></div><div class="bar-row"><div class="bar-label">Price</div><div class="track"><div class="fill" style="--w:85%"></div></div><div class="bar-value">4.25</div></div><div class="bar-row"><div class="bar-label">Taste</div><div class="track"><div class="fill" style="--w:84.4%"></div></div><div class="bar-value">4.22</div></div><div class="bar-row"><div class="bar-label">Known / trusted brand</div><div class="track"><div class="fill" style="--w:84.2%"></div></div><div class="bar-value">4.21</div></div><div class="bar-row"><div class="bar-label">Coldness</div><div class="track"><div class="fill" style="--w:68.6%"></div></div><div class="bar-value">3.43</div></div></div></div><div class="card chart-card"><h3 class="chart-title">What makes consumers reject or switch</h3><p class="chart-sub">Two especially strong practical concerns</p><div class="grid g2" style="margin-top:28px"><div class="insight"><div class="tag">Price friction</div><h3 style="font-size:44px;margin-top:14px">56%</h3><p>would reject or switch if a brand feels too expensive.</p></div><div class="insight"><div class="tag">Safety cue</div><h3 style="font-size:44px;margin-top:14px">52%</h3><p>would reject if the seal or bottle looks unsafe.</p></div></div><div class="callout" style="margin-top:18px">The strongest purchase criteria are practical: safety, availability, price, taste, and brand trust.</div></div></div>
+<div class="card" style="margin-top:16px">
+<h3 class="chart-title">4Q Buying Style: why “Sort and Select” matters here</h3>
+<p class="chart-sub">The model asks two questions: does the buyer already know what they want, and do they see many acceptable choices or unique value in one supplier or brand?</p>
+<div class="q4">
+<div class="q4-box"><div class="axis">Choice + Solution</div><h4>Search and Choose</h4><p>The buyer needs help deciding but can choose among several providers.</p></div>
+<div class="q4-box"><div class="axis">Value + Solution</div><h4>Trusted Advisor</h4><p>The buyer needs help and trusts one provider to guide the decision.</p></div>
+<div class="q4-box active"><div class="axis">Choice + Product</div><h4>Sort and Select</h4><p><strong>Closest fit for many single-bottle purchases in our interviews.</strong> The buyer already wants water and chooses among acceptable options that are available, cold, safe, and reasonably priced.</p></div>
+<div class="q4-box"><div class="axis">Value + Product</div><h4>“Starbucks”</h4><p>The buyer knows what they want and strongly prefers one particular brand or supplier.</p></div>
+</div>
+<div class="callout" style="margin-top:16px">Why this matters for Amlan: if the consumer is sorting among what is available now, a brand that is absent from the cooler or shelf cannot compete on taste, price, or brand preference.</div>
+<div class="source-note">Framework source: Martyn R. Lewis, <em>How Customers Buy… &amp; Why They Don’t</em> (2018).</div>
+</div>
+</section>
+
+<section id="sample"><div class="section-head"><h2>Research design and dataset</h2><p>Multiple sources were used so that one survey number or one interview would not carry the whole conclusion.</p></div><div class="grid g5"><div class="card metric"><div class="k">109</div><div class="label">Raw survey responses</div><div class="sub">Before eligibility screening</div></div><div class="card metric"><div class="k red">87</div><div class="label">Eligible survey respondents</div><div class="sub">18+ and bought bottled water in the past 30 days</div></div><div class="card metric"><div class="k">81</div><div class="label">Philippines-based respondents</div><div class="sub">Used for Amlan-specific funnel analysis</div></div><div class="card metric"><div class="k">6 + 6</div><div class="label">Consumer + retailer interviews</div><div class="sub">Qualitative purchase stories and trade evidence</div></div><div class="card metric"><div class="k red">13</div><div class="label">Store observations</div><div class="sub">Photographed retail displays, Oct 5–11, 2026</div></div></div><div class="callout" style="margin-top:16px">Also included: 1 Amlan company interview. The design is exploratory and uses convenience sampling, so the findings describe our sample and observed outlets, not all Filipino consumers.</div></section>
+<section id="survey"><div class="section-head"><h2>Consumer value drivers</h2><p>Importance rating from 1 = not important to 5 = very important, among 87 eligible survey respondents.</p></div><div class="grid g2"><div class="card chart-card"><h3 class="chart-title">Practical value drivers rank highest</h3><p class="chart-sub">Average importance scores</p><div class="bar-chart"><div class="bar-row"><div class="bar-label">Safety &amp; cleanliness</div><div class="track"><div class="fill red" style="--w:94.8%"></div></div><div class="bar-value">4.74</div></div><div class="bar-row"><div class="bar-label">Availability</div><div class="track"><div class="fill" style="--w:85%"></div></div><div class="bar-value">4.25</div></div><div class="bar-row"><div class="bar-label">Price</div><div class="track"><div class="fill" style="--w:85%"></div></div><div class="bar-value">4.25</div></div><div class="bar-row"><div class="bar-label">Taste</div><div class="track"><div class="fill" style="--w:84.4%"></div></div><div class="bar-value">4.22</div></div><div class="bar-row"><div class="bar-label">Known / trusted brand</div><div class="track"><div class="fill" style="--w:84.2%"></div></div><div class="bar-value">4.21</div></div><div class="bar-row"><div class="bar-label">Coldness</div><div class="track"><div class="fill" style="--w:68.6%"></div></div><div class="bar-value">3.43</div></div></div></div><div class="card chart-card"><h3 class="chart-title">What makes consumers reject or switch</h3><p class="chart-sub">Two especially strong practical concerns</p><div class="grid g2" style="margin-top:28px"><div class="insight"><div class="tag">Price friction</div><h3 style="font-size:44px;margin-top:14px">56%</h3><p>would reject or switch if a brand feels too expensive.</p></div><div class="insight"><div class="tag">Safety cue</div><h3 style="font-size:44px;margin-top:14px">52%</h3><p>would reject if the seal or bottle looks unsafe.</p></div></div><div class="callout" style="margin-top:18px">The strongest purchase criteria are practical: safety, availability, price, taste, and brand trust.</div></div></div>
 <div class="grid g2" style="margin-top:16px"><div class="card chart-card"><h3 class="chart-title">Amlan awareness-to-purchase funnel</h3><p class="chart-sub">Philippines-based eligible respondents, n = 81</p><div class="funnel"><div class="fstep" style="--w:92%"><b>63%</b><span>Unfamiliar · n=51</span></div><div class="fstep" style="--w:72%"><b>37%</b><span>Aware · n=30</span></div><div class="fstep" style="--w:54%"><b>22%</b><span>Tried / consumed · n=18</span></div><div class="fstep" style="--w:38%"><b>11%</b><span>Purchased themselves · n=9</span></div></div></div><div class="card chart-card"><h3 class="chart-title">Among Amlan triers</h3><p class="chart-sub">Philippines-based respondents who tried / consumed Amlan, n = 18</p><div class="mini-bars"><div><div class="mini"><div class="name">Safety / quality</div><div class="count">12/18</div></div><div class="mini-line"><span style="--w:66.7%"></span></div></div><div><div class="mini"><div class="name">Taste</div><div class="count">9/18</div></div><div class="mini-line"><span style="--w:50%"></span></div></div><div><div class="mini"><div class="name">Price</div><div class="count">7/18</div></div><div class="mini-line"><span style="--w:38.9%"></span></div></div></div><div class="callout" style="margin-top:22px">The product proposition appears credible among triers, but the trier base is small. Do not generalize this to the whole market.</div></div></div></section>
-
 <section id="interviews"><div class="section-head"><h2>Consumer interview findings</h2><p>The interview evidence makes situational factors much more visible than a general survey question does.</p></div><div class="grid g2"><div class="card chart-card"><h3 class="chart-title">Six consumer interviews</h3><p class="chart-sub">Themes mentioned in real bottled-water purchase stories</p><div class="mini-bars"><div><div class="mini"><div class="name">Price / affordability</div><div class="count">6/6</div></div><div class="mini-line"><span style="--w:100%"></span></div></div><div><div class="mini"><div class="name">Availability / convenience</div><div class="count">6/6</div></div><div class="mini-line"><span style="--w:100%"></span></div></div><div><div class="mini"><div class="name">Coldness</div><div class="count">5/6</div></div><div class="mini-line"><span style="--w:83.3%"></span></div></div><div><div class="mini"><div class="name">Safety / trust</div><div class="count">5/6</div></div><div class="mini-line"><span style="--w:83.3%"></span></div></div><div><div class="mini"><div class="name">Retailer influence</div><div class="count">3/6</div></div><div class="mini-line"><span style="--w:50%"></span></div></div><div><div class="mini"><div class="name">Taste</div><div class="count">2/6</div></div><div class="mini-line"><span style="--w:33.3%"></span></div></div><div><div class="mini"><div class="name">ESG meaningfully affects choice</div><div class="count">1/6</div></div><div class="mini-line"><span style="--w:16.7%"></span></div></div></div></div><div class="card"><h3 class="chart-title">Coldness becomes more salient in actual purchase contexts</h3><p class="chart-sub">Survey: coldness = 3.43 / 5. Interviews: 5 of 6 mentioned it.</p><div class="insight"><div class="tag">Context effect</div><h3>Coldness becomes more important at the point of consumption.</h3><p>Heat, work, travel, exercise, meals, and immediate thirst can change which attribute becomes most important. The survey captures stated importance; interviews capture the purchase situation.</p></div><div class="insight" style="margin-top:14px"><div class="tag">Attitude-behavior gap</div><h3>Sustainability is liked, but often not decisive.</h3><p>Respondents can genuinely support eco-friendly packaging while still choosing based on price, availability, coldness, safety, or convenience when the purchase happens.</p></div></div></div></section>
+<section id="retail"><div class="section-head"><h2>Retailers shape the available choice set</h2><p>In low-involvement purchases, the retailer determines what is stocked, cold, visible, easy to reach, and sometimes what is physically handed to the buyer.</p></div><div class="grid g2"><div class="card chart-card"><h3 class="chart-title">Six retailer interviews</h3><p class="chart-sub">Trade-side evidence</p><div class="evidence-list"><div class="evidence"><span><strong>Coldness important</strong><br/><small>Immediate-use value</small></span><span class="pill red">6/6</span></div><div class="evidence"><span><strong>Reliable delivery / supplier access</strong><br/><small>Retailer buying concern</small></span><span class="pill">6/6</span></div><div class="evidence"><span><strong>Price / margin important</strong><br/><small>Commercial value</small></span><span class="pill">6/6</span></div><div class="evidence"><span><strong>Most customers ask for “water”</strong><br/><small>Low brand involvement</small></span><span class="pill red">5/6</span></div><div class="evidence"><span><strong>No clear Amlan channel contact</strong><br/><small>Trade-access friction</small></span><span class="pill red">5/6</span></div><div class="evidence"><span><strong>Open to stocking Amlan under conditions</strong><br/><small>Actionable opportunity</small></span><span class="pill">6/6</span></div><div class="evidence"><span><strong>Currently stock Amlan</strong><br/><small>Current sample gap</small></span><span class="pill red">0/6</span></div></div></div><div class="card chart-card"><h3 class="chart-title">Store visibility audit</h3><p class="chart-sub">13 photographed outlets, Oct 5–11, 2026</p><div class="bar-chart"><div class="bar-row"><div class="bar-label">Nature's Spring</div><div class="track"><div class="fill" style="--w:84.6%"></div></div><div class="bar-value">11/13</div></div><div class="bar-row"><div class="bar-label">Absolute</div><div class="track"><div class="fill" style="--w:61.5%"></div></div><div class="bar-value">8/13</div></div><div class="bar-row"><div class="bar-label">Wilkins</div><div class="track"><div class="fill" style="--w:61.5%"></div></div><div class="bar-value">8/13</div></div><div class="bar-row"><div class="bar-label">Refresh</div><div class="track"><div class="fill" style="--w:46.2%"></div></div><div class="bar-value">6/13</div></div><div class="bar-row"><div class="bar-label">Evian</div><div class="track"><div class="fill" style="--w:38.5%"></div></div><div class="bar-value">5/13</div></div><div class="bar-row"><div class="bar-label">Amlan</div><div class="track"><div class="fill red" style="--w:1%"></div></div><div class="bar-value" style="color:var(--red)">0/13</div></div></div><div class="grid g2" style="margin-top:18px"><div class="insight"><div class="tag">Cold-stock context</div><h3>11 / 13</h3><p>outlets showed clearly refrigerated bottled water.</p></div><div class="insight"><div class="tag">Important caution</div><h3>Visibility ≠ inventory</h3><p>“Not visible in the photographed display” does not prove the store did not carry Amlan elsewhere.</p></div></div></div></div></section>
+<section id="journey"><div class="section-head"><h2>Primary friction points in the buying journey</h2><p>Triangulation points to friction before consumers can fully evaluate Amlan’s product value.</p></div><div class="card"><div class="journey"><div class="stage bad"><div class="num">1</div><h4>Awareness</h4><p>63% of PH-based eligible respondents were unfamiliar with Amlan.</p></div><div class="stage bad"><div class="num">2</div><h4>Retailer access</h4><p>5 of 6 retailers lacked a clear Amlan sales / distributor contact.</p></div><div class="stage bad"><div class="num">3</div><h4>Availability &amp; visibility</h4><p>0 of 13 photographed displays showed visible Amlan.</p></div><div class="stage bad"><div class="num">4</div><h4>Trial</h4><p>Only 22% of PH-based eligible respondents had tried or consumed Amlan.</p></div><div class="stage good"><div class="num">5</div><h4>Product value</h4><p>Among triers, safety/quality, taste, and price appear credible.</p></div><div class="stage future"><div class="num">6</div><h4>Future research: Repeat</h4><p>Repeat purchase was not directly measured. Future work should test whether trial converts into sustained repurchase once availability improves.</p></div></div><div class="zone">Main friction zone: before product evaluation</div></div></section>
 
-<section id="retail"><div class="section-head"><h2>Retailers shape the available choice set</h2><p>In low-involvement purchases, the retailer determines what is stocked, cold, visible, easy to reach, and sometimes what is physically handed to the buyer.</p></div><div class="grid g2"><div class="card chart-card"><h3 class="chart-title">Six retailer interviews</h3><p class="chart-sub">Trade-side evidence</p><div class="evidence-list"><div class="evidence"><span><strong>Coldness important</strong><br><small>Immediate-use value</small></span><span class="pill red">6/6</span></div><div class="evidence"><span><strong>Reliable delivery / supplier access</strong><br><small>Retailer buying concern</small></span><span class="pill">6/6</span></div><div class="evidence"><span><strong>Price / margin important</strong><br><small>Commercial value</small></span><span class="pill">6/6</span></div><div class="evidence"><span><strong>Most customers ask for “water”</strong><br><small>Low brand involvement</small></span><span class="pill red">5/6</span></div><div class="evidence"><span><strong>No clear Amlan channel contact</strong><br><small>Trade-access friction</small></span><span class="pill red">5/6</span></div><div class="evidence"><span><strong>Open to stocking Amlan under conditions</strong><br><small>Actionable opportunity</small></span><span class="pill">6/6</span></div><div class="evidence"><span><strong>Currently stock Amlan</strong><br><small>Current sample gap</small></span><span class="pill red">0/6</span></div></div></div><div class="card chart-card"><h3 class="chart-title">Store visibility audit</h3><p class="chart-sub">13 photographed outlets, Oct 5–11, 2026</p><div class="bar-chart"><div class="bar-row"><div class="bar-label">Nature's Spring</div><div class="track"><div class="fill" style="--w:84.6%"></div></div><div class="bar-value">11/13</div></div><div class="bar-row"><div class="bar-label">Absolute</div><div class="track"><div class="fill" style="--w:61.5%"></div></div><div class="bar-value">8/13</div></div><div class="bar-row"><div class="bar-label">Wilkins</div><div class="track"><div class="fill" style="--w:61.5%"></div></div><div class="bar-value">8/13</div></div><div class="bar-row"><div class="bar-label">Refresh</div><div class="track"><div class="fill" style="--w:46.2%"></div></div><div class="bar-value">6/13</div></div><div class="bar-row"><div class="bar-label">Evian</div><div class="track"><div class="fill" style="--w:38.5%"></div></div><div class="bar-value">5/13</div></div><div class="bar-row"><div class="bar-label">Amlan</div><div class="track"><div class="fill red" style="--w:1%"></div></div><div class="bar-value" style="color:var(--red)">0/13</div></div></div><div class="grid g2" style="margin-top:18px"><div class="insight"><div class="tag">Cold-stock context</div><h3>11 / 13</h3><p>outlets showed clearly refrigerated bottled water.</p></div><div class="insight"><div class="tag">Important caution</div><h3>Visibility ≠ inventory</h3><p>“Not visible in the photographed display” does not prove the store did not carry Amlan elsewhere.</p></div></div></div></div></section>
+<section id="triangulation"><div class="section-head"><h2>Triangulation in one view</h2><p>Different methods reveal different pieces of the same problem.</p></div>
+<div class="card matrix-wrap" style="overflow:auto"><div class="matrix">
+<div class="cell head">Issue</div><div class="cell head">Survey</div><div class="cell head">Consumers</div><div class="cell head">Retailers</div><div class="cell head">Stores / Company</div>
+<div class="cell rowhead">Awareness</div><div class="cell warn">63% unfamiliar</div><div class="cell">Several had never heard of Amlan</div><div class="cell">Low awareness in several stores</div><div class="cell">Supports need to build reach</div>
+<div class="cell rowhead">Availability</div><div class="cell yes">4.25 / 5 importance</div><div class="cell yes">6/6 availability / convenience themes</div><div class="cell warn">0/6 stocked Amlan</div><div class="cell warn">Company cites stock / capacity</div>
+<div class="cell rowhead">Coldness</div><div class="cell">3.43 / 5 stated importance</div><div class="cell yes">5/6 mentioned it</div><div class="cell yes">6/6 said it matters</div><div class="cell yes">11/13 had refrigerated water visible</div>
+<div class="cell rowhead">Retail access</div><div class="cell">Not directly measured</div><div class="cell">Retailer can influence final bottle</div><div class="cell warn">5/6 no clear Amlan contact</div><div class="cell">Managerial execution issue</div>
+<div class="cell rowhead">Product value</div><div class="cell yes">Safety, price, taste, trust score highly</div><div class="cell yes">Safety / trust 5/6</div><div class="cell">Retailers want demand + margin</div><div class="cell yes">Company cites price + taste as strengths</div>
+</div></div>
 
-<section id="journey"><div class="section-head"><h2>Primary friction points in the buying journey</h2><p>Triangulation points to friction before consumers can fully evaluate Amlan’s product value.</p></div><div class="card"><div class="journey"><div class="stage bad"><div class="num">1</div><h4>Awareness</h4><p>63% of PH-based eligible respondents were unfamiliar with Amlan.</p></div><div class="stage bad"><div class="num">2</div><h4>Retailer access</h4><p>5 of 6 retailers lacked a clear Amlan sales / distributor contact.</p></div><div class="stage bad"><div class="num">3</div><h4>Availability & visibility</h4><p>0 of 13 photographed displays showed visible Amlan.</p></div><div class="stage bad"><div class="num">4</div><h4>Trial</h4><p>Only 22% of PH-based eligible respondents had tried or consumed Amlan.</p></div><div class="stage good"><div class="num">5</div><h4>Product value</h4><p>Among triers, safety/quality, taste, and price appear credible.</p></div><div class="stage good"><div class="num">6</div><h4>Repeat</h4><p>Potentially follows if product value is experienced and availability is maintained.</p></div></div><div class="zone">Main friction zone: before product evaluation</div></div></section>
+<div class="tri-mobile">
+<div class="tri-card"><h4>Awareness</h4><div class="tri-line"><b>Survey</b><span>63% unfamiliar</span></div><div class="tri-line"><b>Consumers</b><span>Several had never heard of Amlan</span></div><div class="tri-line"><b>Retailers</b><span>Low awareness in several stores</span></div><div class="tri-line"><b>Company / stores</b><span>Supports need to build reach</span></div></div>
+<div class="tri-card"><h4>Availability</h4><div class="tri-line"><b>Survey</b><span>4.25 / 5 importance</span></div><div class="tri-line"><b>Consumers</b><span>6/6 availability / convenience themes</span></div><div class="tri-line"><b>Retailers</b><span>0/6 stocked Amlan</span></div><div class="tri-line"><b>Company / stores</b><span>Company cites stock / capacity</span></div></div>
+<div class="tri-card"><h4>Coldness</h4><div class="tri-line"><b>Survey</b><span>3.43 / 5 stated importance</span></div><div class="tri-line"><b>Consumers</b><span>5/6 mentioned it</span></div><div class="tri-line"><b>Retailers</b><span>6/6 said it matters</span></div><div class="tri-line"><b>Stores</b><span>11/13 had refrigerated water visible</span></div></div>
+<div class="tri-card"><h4>Retail access</h4><div class="tri-line"><b>Survey</b><span>Not directly measured</span></div><div class="tri-line"><b>Consumers</b><span>Retailer can influence final bottle</span></div><div class="tri-line"><b>Retailers</b><span>5/6 no clear Amlan contact</span></div><div class="tri-line"><b>Interpretation</b><span>Managerial execution issue</span></div></div>
+<div class="tri-card"><h4>Product value</h4><div class="tri-line"><b>Survey</b><span>Safety, price, taste, and trust score highly</span></div><div class="tri-line"><b>Consumers</b><span>Safety / trust 5/6</span></div><div class="tri-line"><b>Retailers</b><span>Retailers want demand + margin</span></div><div class="tri-line"><b>Company</b><span>Price + taste cited as strengths</span></div></div>
+</div>
+</section>
 
-<section><div class="section-head"><h2>Triangulation in one view</h2><p>Different methods reveal different pieces of the same problem.</p></div><div class="card" style="overflow:auto"><div class="matrix"><div class="cell head">Issue</div><div class="cell head">Survey</div><div class="cell head">Consumers</div><div class="cell head">Retailers</div><div class="cell head">Stores / Company</div><div class="cell rowhead">Awareness</div><div class="cell warn">63% unfamiliar</div><div class="cell">Several had never heard of Amlan</div><div class="cell">Low awareness in several stores</div><div class="cell">Supports need to build reach</div><div class="cell rowhead">Availability</div><div class="cell yes">4.25 / 5 importance</div><div class="cell yes">6/6 price/availability themes</div><div class="cell warn">0/6 stocked Amlan</div><div class="cell warn">Company cites stock / capacity</div><div class="cell rowhead">Coldness</div><div class="cell">3.43 / 5 stated importance</div><div class="cell yes">5/6 mentioned it</div><div class="cell yes">6/6 said it matters</div><div class="cell yes">11/13 had refrigerated water visible</div><div class="cell rowhead">Retail access</div><div class="cell">Not directly measured</div><div class="cell">Retailer can influence final bottle</div><div class="cell warn">5/6 no clear Amlan contact</div><div class="cell">Managerial execution issue</div><div class="cell rowhead">Product value</div><div class="cell yes">Safety, price, taste, trust score highly</div><div class="cell yes">Safety/trust 5/6</div><div class="cell">Retailers want demand + margin</div><div class="cell yes">Company cites price + taste as strengths</div></div></div></section>
+<section id="comparison">
+<div class="section-head"><h2>What management sees vs what the field evidence adds</h2><p>The study does not simply repeat management's view. It broadens the diagnosis by comparing company assumptions with evidence from buyers, retailers, and stores.</p></div>
+<div class="split-compare">
+<div class="compare-panel company">
+<h3>Company view</h3>
+<div class="compare-row"><b>Consumer choice</b>Price point and taste profile</div>
+<div class="compare-row"><b>Why consumers switch</b>Price and availability</div>
+<div class="compare-row"><b>Retailers</b>Important referral and word-of-mouth agents</div>
+<div class="compare-row"><b>Main distribution challenge</b>Production capacity, stock availability, and delivery commitments</div>
+<div class="compare-row"><b>Retailer stocking</b>Price is an important factor</div>
+</div>
+<div class="compare-panel field">
+<h3>What the field evidence adds</h3>
+<div class="compare-row"><b>Consumer choice</b>Price and taste matter, but safety, availability, trust, and coldness also shape the purchase.</div>
+<div class="compare-row"><b>Why consumers switch</b>Price and availability are strongly supported; safety cues can also stop choice.</div>
+<div class="compare-row"><b>Retailers</b>Retailers can become de facto brand selectors when shoppers simply ask for “water.”</div>
+<div class="compare-row"><b>Distribution</b>The issue appears broader than capacity: retailer access, supplier contact, visibility, refrigeration, and shelf execution also matter.</div>
+<div class="compare-row"><b>Retailer stocking</b>Retailers also consider margin, delivery reliability, demand, reorder ease, and inventory risk.</div>
+</div>
+</div>
+<div class="callout" style="margin-top:16px">Interpretation: management appears directionally right, but the field evidence suggests the path-to-purchase problem extends beyond product attributes and production capacity.</div>
+</section>
 
-<section id="implications"><div class="section-head"><h2>Managerial implications</h2><p>These are evidence-based implications, not proof of causality.</p></div><div class="grid g3"><div class="insight"><div class="tag">1 · Fix access first</div><h3>Improve retailer access and replenishment.</h3><p>A clear retailer contact channel, reliable delivery, and stock tracking address friction before the consumer ever reaches the product.</p></div><div class="insight"><div class="tag">2 · Win the moment</div><h3>Strengthen visibility, cold availability, and point-of-purchase access.</h3><p>For fast, low-involvement purchases, cooler execution may matter as much as communication.</p></div><div class="insight"><div class="tag">3 · Segment the journey</div><h3>Different buying situations require different market approaches.</h3><p>Single-bottle buyers, household bulk buyers, and institutional/event buyers can have different buying DNA and different priorities.</p></div></div></section>
+<section id="reflection">
+<div class="section-head"><h2>Critical reflection: does Lewis fully explain bottled water?</h2><p>This case is useful partly because it tests the framework in a very short, low-involvement consumer journey.</p></div>
+<div class="reflection">
+<div class="reflection-panel">
+<h3>Where Lewis works well</h3>
+<ul>
+<li>Triggers remain identifiable: heat, thirst, food, work, and travel.</li>
+<li>Steps still exist, even when the whole journey takes only seconds.</li>
+<li>Retailers clearly operate as Key Players.</li>
+<li>Value Drivers and Buying Concerns explain why an acceptable bottle is chosen or rejected.</li>
+<li>Sort and Select fits many commodity-like, single-bottle purchases.</li>
+</ul>
+</div>
+<div class="reflection-panel">
+<h3>Where the framework needs caution</h3>
+<ul>
+<li>The book's detailed research and examples are strongly rooted in organizational and B2B buying, even though Lewis presents the framework as broadly applicable.</li>
+<li>Low-involvement purchases can be far less deliberate than complex organizational purchases.</li>
+<li>Situational conditions such as heat, immediate thirst, refrigeration, and shelf availability can dominate the decision.</li>
+<li>Different bottled-water occasions may represent different journeys, so one “average customer” can hide important variation.</li>
+</ul>
+</div>
+</div>
+<div class="verdict"><strong>Our conclusion</strong>Lewis still helps explain bottled-water purchasing, but the journey is highly compressed and situational. The framework is most useful here as a diagnostic lens, not as a claim that every purchase follows a long or conscious process.</div>
+</section>
 
-<footer><div class="sources"><div><strong>Research basis</strong><p>Bottled Water Buying Journey Survey · 6 consumer interviews · 6 retailer interviews · 13 store observations · 1 Amlan company interview · group coding and triangulation.</p><p class="note">Framework lens: Martyn R. Lewis, <em>How Customers Buy… & Why They Don’t</em>.</p></div><div><strong>Interpret carefully</strong><p>Exploratory convenience sample. Findings describe the participants and observed outlets in this project. They should not be generalized to all Filipino consumers or all retailers.</p></div></div></footer>
+
+<section id="implications"><div class="section-head"><h2>Managerial implications</h2><p>These are evidence-based implications, not proof of causality. The next step should be a controlled retail test.</p></div>
+<div class="grid g3">
+<div class="insight"><div class="tag">1 · Fix access first</div><h3>Improve retailer access and replenishment.</h3><p>A clear retailer contact channel, reliable delivery, and stock tracking address friction before the consumer ever reaches the product.</p></div>
+<div class="insight"><div class="tag">2 · Win the moment</div><h3>Strengthen visibility, cold availability, and point-of-purchase access.</h3><p>For fast, low-involvement purchases, cooler execution may matter as much as communication.</p></div>
+<div class="insight"><div class="tag">3 · Segment the journey</div><h3>Different buying situations require different market approaches.</h3><p>Single-bottle buyers, household bulk buyers, and institutional/event buyers can have different buying DNA and different priorities.</p></div>
+</div>
+<div class="card" style="margin-top:16px">
+<h3 class="chart-title">A practical 90-day pilot</h3>
+<p class="chart-sub">Use the exploratory findings to generate measurable evidence before scaling.</p>
+<div class="grid g3">
+<div class="insight"><div class="tag">Days 1–30</div><h3>Map and stabilize access</h3><p>Baseline outlet coverage, fill rate, delivery reliability, supplier contacts, and current shelf/cooler presence.</p></div>
+<div class="insight"><div class="tag">Days 31–60</div><h3>Pilot the moment of choice</h3><p>Secure trial outlets, make reordering easy, improve facings and cold-stock standards, then verify execution.</p></div>
+<div class="insight"><div class="tag">Days 61–90</div><h3>Measure and learn</h3><p>Track sell-through, stockouts, reorder rate, trial, on-shelf availability, and cold availability before deciding what to scale.</p></div>
+</div>
+</div>
+</section>
+
+<section id="limitations">
+<div class="section-head"><h2>Limitations and boundaries</h2><p>These constraints define what the study can and cannot claim.</p></div>
+<div class="card">
+<div class="limits-grid">
+<ul class="limits-list">
+<li><strong>Convenience sample:</strong> survey percentages are descriptive of this sample, not population estimates for Metro Cebu or the Philippines.</li>
+<li><strong>Small qualitative sample:</strong> six consumer and six retailer interviews explain patterns, not prevalence.</li>
+<li><strong>Store-photo scope:</strong> absence from a photographed display does not prove a store did not stock Amlan elsewhere.</li>
+</ul>
+<ul class="limits-list">
+<li><strong>No institutional-buyer interviews:</strong> LGU, corporate, and event journeys remain under-researched.</li>
+<li><strong>No competitor-price audit:</strong> the study cannot independently establish that Amlan is the cheapest option.</li>
+<li><strong>Stated vs actual behavior:</strong> survey attitudes can differ from decisions made under real purchase conditions.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="references">
+<div class="section-head"><h2>Research basis and references</h2><p>Primary evidence and the main framework used to interpret it.</p></div>
+<div class="card">
+<div class="ref-block"><strong>Framework</strong><br/>Lewis, Martyn R. <em>How Customers Buy… &amp; Why They Don’t: Mapping and Managing the Buying Journey DNA.</em> Radius Book Group, 2018.</div>
+<div class="ref-block"><strong>Primary research</strong><br/>Bottled Water Buying Journey Survey; six consumer interviews; six retailer interviews; thirteen retail-store observations conducted October 5–11, 2026; one Amlan management interview; group coding and triangulation.</div>
+<div class="ref-block"><strong>Interpretation boundary</strong><br/>The website presents an exploratory consumer-behavior study. It identifies recurring patterns and managerial hypotheses that should be tested further rather than treated as causal or population-level conclusions.</div>
+</div>
+</section>
+
+<footer><div class="sources"><div><strong>Central conclusion</strong><p>Amlan appears to face a path-to-purchase problem before it faces a product-preference problem. Many consumers may not reach the point where they can evaluate the brand at all.</p><p class="note">A brand cannot win a decision it never gets the chance to join.</p></div><div><strong>Interpret carefully</strong><p>Exploratory convenience sample. Findings describe the participants and observed outlets in this project. They should not be generalized to all Filipino consumers or all retailers.</p></div></div></footer>
 </main>
 </body>
 </html>
